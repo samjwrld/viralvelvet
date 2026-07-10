@@ -55,7 +55,7 @@ export default function VelvetBackground() {
   const targetYRef = useRef(0);
   const hasMovedRef = useRef(false);
 
-  // Mouse move listener
+  // Mouse and Touch movement listener
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       targetXRef.current = e.clientX;
@@ -63,9 +63,29 @@ export default function VelvetBackground() {
       hasMovedRef.current = true;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        targetXRef.current = e.touches[0].clientX;
+        targetYRef.current = e.touches[0].clientY;
+        hasMovedRef.current = true;
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        targetXRef.current = e.touches[0].clientX;
+        targetYRef.current = e.touches[0].clientY;
+        hasMovedRef.current = true;
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
 
