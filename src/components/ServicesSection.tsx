@@ -214,6 +214,63 @@ export default function ServicesSection({ activeTexture = "obsidian" }: Services
           );
         })}
       </div>
+
+      {/* Supporting Services Section */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-36 pt-24 border-t border-white/5 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <div className="lg:col-span-5 space-y-6 text-left">
+            <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-luxury-gold block">
+              SUPPORTING CAPABILITIES
+            </span>
+            <h3 className="display-serif text-3xl md:text-5xl text-lux-text leading-tight">
+              Services That Improve <span className="font-light italic text-luxury-gold">Advertising Performance</span>
+            </h3>
+            <p className="text-sm text-lux-text/60 leading-relaxed font-sans font-light">
+              Exceptional advertising doesn't end with a click. That's why we provide supporting services that help maximize every marketing investment.
+            </p>
+            <div className="w-24 h-[1px] bg-luxury-gold/30 mt-4" />
+            <p className="text-xs text-luxury-gold/70 font-mono tracking-wider uppercase pt-2">
+              Every service exists for one purpose: improving advertising performance and increasing business revenue.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: "High-Converting Landing Pages", desc: "Crafting optimized destinations that convert visitors into valuable clients." },
+                { title: "Website Design & Development", desc: "Engineered with speed and precision for custom user journeys." },
+                { title: "Social Media Management", desc: "Strategic curation that keeps your brand presence active and engaging." },
+                { title: "Creative Design", desc: "Bespoke graphics, layout design, and copy that command attention." },
+                { title: "Video Advertisement Production", desc: "Surgical, performance-focused video assets made for social feeds." },
+                { title: "SEO Foundations", desc: "Building core organic crawlability and technical architecture standards." },
+                { title: "Conversion Rate Optimization (CRO)", desc: "Analyzing click behavior to plug leaks and boost signups." },
+                { title: "Analytics & Reporting", desc: "Cold, unyielding metrics demonstrating exact ROAS and CPA status." },
+                { title: "Pixel & Conversion Tracking", desc: "Advanced server-side conversion API plumbing for flawless attribution." },
+                { title: "Marketing Automation", desc: "Custom email & text follow-ups to nurture leads into acquisitions." }
+              ].map((sub, sIdx) => (
+                <div 
+                  key={sub.title}
+                  className="p-5 border border-white/5 bg-[#131313]/20 hover:border-luxury-gold/20 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="font-mono text-[9px] text-luxury-gold mt-1">0{sIdx + 1}</span>
+                    <div>
+                      <h4 className="font-serif text-base text-lux-text font-normal">
+                        {sub.title}
+                      </h4>
+                      <p className="text-[11px] text-lux-text/50 font-sans font-light mt-1">
+                        {sub.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
   );
 }

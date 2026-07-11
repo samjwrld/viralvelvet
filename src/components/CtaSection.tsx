@@ -17,7 +17,7 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
       <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 space-y-12">
         <div className="space-y-4">
           <span className="font-mono text-[10px] uppercase text-luxury-gold tracking-[0.45em] block">
-            Securing Sovereign Scale
+            SECURE YOUR DOMINANCE
           </span>
           {/* Large Headline */}
           <motion.h2
@@ -27,15 +27,19 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
             transition={{ duration: 1.0 }}
             className="display-serif text-5xl md:text-7xl lg:text-8xl text-lux-text font-light leading-tight tracking-wide"
           >
-            Ready to Become<br />
-            <span className="font-light italic text-luxury-gold">Impossible to Ignore?</span>
+            Ready to <span className="font-light italic text-luxury-gold">Grow Faster?</span>
           </motion.h2>
         </div>
 
         {/* Supporting subtext */}
-        <p className="text-xs md:text-sm text-lux-text/60 max-w-lg mx-auto font-sans leading-relaxed font-light">
-          Your brand deserves digital execution equal to its physical masteristry. Speak directly with our managing partners to explore your market potential.
-        </p>
+        <div className="space-y-4 max-w-xl mx-auto text-xs md:text-sm text-lux-text/70 font-sans leading-relaxed font-light">
+          <p>
+            Your next customer is already searching, scrolling, and making buying decisions. Let's make sure they choose your business.
+          </p>
+          <p className="italic text-lux-text/50">
+            Whether you're launching your first campaign or scaling an existing advertising strategy, ViralVelvet is ready to help you achieve measurable growth.
+          </p>
+        </div>
 
         {/* Large Gold CTA button */}
         <motion.div
@@ -53,7 +57,7 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
             {/* Soft pulsing border around button */}
             <span className="absolute -inset-1.5 rounded-none border border-luxury-gold/25 animate-pulse group-hover:border-luxury-gold/50 transition-colors pointer-events-none" />
 
-            INQUIRE NOW
+            Book Your Strategy Call Today
             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </motion.div>

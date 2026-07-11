@@ -28,13 +28,13 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               </span>
             </div>
             <p className="text-xs text-lux-text/60 leading-relaxed font-sans max-w-sm">
-              We engineer high-performance digital experiences for select brands, translating absolute prestige into mathematical market dominance.
+              <strong>ViralVelvet</strong> is a premium performance marketing agency helping businesses scale through Meta Ads, Google Ads, LinkedIn Ads, conversion-focused websites, and data-driven marketing strategies. We build advertising systems that generate qualified leads, increase revenue, and deliver measurable business growth.
             </p>
             <button
               onClick={onOpenBooking}
               className="text-luxury-gold hover:text-lux-text font-mono text-[9px] uppercase tracking-widest flex items-center gap-2 group transition-colors"
             >
-              INQUIRE FOR AN ALLOCATION 
+              BOOK YOUR STRATEGY CALL
               <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
             </button>
           </div>
@@ -48,7 +48,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               {ALL_SERVICES_LIST.slice(0, 6).map((service) => (
                 <li key={service}>
                   <a
-                    href="#services"
+                    href="#/services"
                     className="text-xs text-lux-text/50 hover:text-lux-text transition-colors font-sans hover:translate-x-0.5 inline-block"
                   >
                     {service}
@@ -67,7 +67,7 @@ export default function Footer({ onOpenBooking }: FooterProps) {
               {ALL_SERVICES_LIST.slice(6, 12).map((service) => (
                 <li key={service}>
                   <a
-                    href="#services"
+                    href="#/services"
                     className="text-xs text-lux-text/50 hover:text-lux-text transition-colors font-sans"
                   >
                     {service}
@@ -80,25 +80,24 @@ export default function Footer({ onOpenBooking }: FooterProps) {
           {/* Column 4: Private Salons (Contact) */}
           <div className="space-y-4">
             <h4 className="font-mono text-[10px] uppercase tracking-[0.3em] text-luxury-gold font-semibold">
-              Corporate Salons
+              Corporate Headquarters
             </h4>
             <div className="space-y-4 text-xs font-sans text-lux-text/50">
               <div>
-                <p className="text-lux-text/80 font-medium">MAYFAIR</p>
-                <p>28 Bruton Place, London W1J 6NP</p>
+                <p className="text-luxury-gold font-medium font-mono text-[10px] tracking-wider uppercase mb-1">HEAD OFFICE (HYDERABAD)</p>
+                <p className="text-lux-text/80 font-normal">Villa no. 48, Mythri Lake view housing society,</p>
+                <p className="text-lux-text/60">Mallampet, Bachupally, Hyderabad,</p>
+                <p className="text-lux-text/60 font-medium text-luxury-gold/70 pb-3">Telangana 502325</p>
               </div>
-              <div>
-                <p className="text-lux-text/80 font-medium">PARIS</p>
-                <p>75 Rue du Faubourg Saint-Honoré, 75008</p>
-              </div>
-              <div>
-                <p className="text-lux-text/80 font-medium">NEW YORK</p>
-                <p>730 Fifth Avenue, NY 10019</p>
-              </div>
-              <div className="pt-2 border-t border-white/5 font-mono text-[9px] tracking-widest">
-                <a href="mailto:concierge@viralvelvet.com" className="text-luxury-gold hover:underline">
-                  concierge@viralvelvet.com
-                </a>
+              <div className="pt-2 border-t border-white/5 font-mono text-[9px] tracking-widest space-y-1">
+                <p>
+                  <a href="mailto:concierge@viralvelvet.com" className="text-luxury-gold hover:underline">
+                    concierge@viralvelvet.com
+                  </a>
+                </p>
+                <p className="text-lux-text/60">
+                  Phone: +91 63024 15865
+                </p>
               </div>
             </div>
           </div>

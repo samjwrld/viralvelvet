@@ -3,48 +3,30 @@ import { Service, CaseStudy, ProcessStep, Testimonial } from "./types";
 export const SERVICES_DATA: Service[] = [
   {
     id: "meta-ads",
-    title: "META ADS",
-    quote: "We don't buy impressions. We create influence.",
-    description: "Architecting hyper-targeted, cinematic social campaigns designed to occupy mindshare. We design high-converting visual stories that render algorithms obsolete, positioning your offer not as a purchase, but as an entry into an elite circle.",
+    title: "META ADS MANAGEMENT",
+    quote: "Reach the right audience on Facebook and Instagram with campaigns designed to generate qualified leads, increase online sales, and grow your customer base.",
+    description: "Our Meta Ads services include: Lead Generation Campaigns, Conversion Campaigns, eCommerce Advertising, WhatsApp Lead Generation, Messenger Campaigns, Retargeting & Remarketing, Advantage+ Shopping Campaigns, Dynamic Creative Optimization, Audience Research & Lookalike Audiences, and Campaign Scaling & Optimization.",
     image: "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?auto=format&fit=crop&w=1000&q=80",
     metricLabel: "Average Client ROAS",
     metricVal: "7.8x"
   },
   {
     id: "google-ads",
-    title: "GOOGLE ADS",
-    quote: "Every click deserves intention.",
-    description: "Dominating high-intent luxury keywords. We intercept buyers exactly when their desire peaks, crafting highly customized search and shopping journeys that align with the high-ticket expectations of premium clients.",
+    title: "GOOGLE ADS MANAGEMENT",
+    quote: "Connect with customers exactly when they're searching for your products or services.",
+    description: "Our Google Ads specialists build highly optimized campaigns that increase visibility, reduce wasted ad spend, and drive high-intent conversions. Services include: Google Search Ads, Performance Max Campaigns, Google Shopping Ads, Display Advertising, YouTube Advertising, Local Campaigns, Call Campaigns, Remarketing, Conversion Tracking, and Campaign Optimization.",
     image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1000&q=80",
-    metricLabel: "High-Ticket Client Acquisition",
+    metricLabel: "High-Intent Acquisition Growth",
     metricVal: "+240%"
   },
   {
     id: "linkedin",
-    title: "LINKEDIN MARKETING",
-    quote: "Authority attracts opportunity.",
-    description: "Transforming founders and executives into industry icons. Through meticulous personal branding and intellectual performance marketing, we establish absolute B2B authority, opening doors to high-caliber alliances and venture opportunities.",
+    title: "LINKEDIN ADS MANAGEMENT",
+    quote: "Generate high-quality B2B leads and connect directly with business owners, executives, procurement teams, HR leaders, and decision-makers.",
+    description: "Our LinkedIn advertising solutions include: Sponsored Content, Lead Generation Forms, Conversation Ads, Message Ads, Event Promotions, Account-Based Marketing (ABM), Executive Targeting, and B2B Lead Generation Campaigns.",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1000&q=80",
-    metricLabel: "Executive Reaches Secured",
+    metricLabel: "Executive Contacts Reached",
     metricVal: "12M+"
-  },
-  {
-    id: "web-development",
-    title: "WEB DEVELOPMENT",
-    quote: "Luxury isn't designed. It's engineered.",
-    description: "Forging blistering-fast, bespoke digital flagships. Our platforms feature buttery-smooth transitions, pristine typography, and custom 3D engines that deliver sensory luxury with zero friction. We build digital real estate that commands premium prices.",
-    image: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1000&q=80",
-    metricLabel: "Site Speed Score",
-    metricVal: "99/100"
-  },
-  {
-    id: "social-media",
-    title: "SOCIAL MEDIA",
-    quote: "Stories become status.",
-    description: "Curation that inspires absolute devotion. We turn company social handles into living luxury galleries. Utilizing bespoke cinematography, haute-couture editorial curation, and sophisticated copy to cultivate an obsessive following.",
-    image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1000&q=80",
-    metricLabel: "Brand Love & Engagement",
-    metricVal: "4.2x"
   }
 ];
 
@@ -63,7 +45,7 @@ export const PORTFOLIO_DATA: CaseStudy[] = [
     description: "A private enclave of multi-million dollar penthouses. We created an invitation-only digital campaign and high-end interactive portal that drove complete sell-out in 42 days, fully bypassing public MLS listings.",
     image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80",
     stats: [
-      { label: "Revenue Generated", value: "$142M" },
+      { label: "Revenue Generated", value: "₹1,180 Cr" },
       { label: "Sell-out Time", value: "42 Days" },
       { label: "ROAS achieved", value: "11.2x" }
     ]
@@ -101,41 +83,41 @@ export const PROCESS_DATA: ProcessStep[] = [
     id: "discover",
     number: "01",
     title: "Discover",
-    description: "Meticulous deep-dive into your brand's heritage, unit economics, and target audience's psychological drivers of desire.",
+    description: "We begin by understanding your business, industry, competitors, target audience, and growth objectives.",
     duration: "Week 1",
-    focus: "Competitive Archeology"
+    focus: "Strategic Alignment"
   },
   {
     id: "strategy",
     number: "02",
     title: "Strategy",
-    description: "Engineering the customized digital architecture. We define exact keyword domains, creative concepts, and audience segment exclusions.",
-    duration: "Week 2-3",
-    focus: "Exclusive Playbook"
-  },
-  {
-    id: "design",
-    number: "03",
-    title: "Design",
-    description: "Crafting haute-couture creative assets. Cinema-grade video production, ultra-premium web design layouts, and copy that commands.",
-    duration: "Week 4-5",
-    focus: "Creative Masterpieces"
+    description: "We create a tailored advertising strategy with the right platforms, messaging, audience targeting, and budget allocation.",
+    duration: "Week 2",
+    focus: "Tactical Architecture"
   },
   {
     id: "launch",
-    number: "04",
+    number: "03",
     title: "Launch",
-    description: "Unveiling your campaign with silent, surgical precision. No fanfare, just strategic execution that commands high conversions immediately.",
-    duration: "Week 6",
-    focus: "Immersive Activation"
+    description: "Our specialists build, test, and launch campaigns across Meta Ads, Google Ads, and LinkedIn Ads using proven frameworks.",
+    duration: "Week 3",
+    focus: "Ad Deployment"
+  },
+  {
+    id: "optimize",
+    number: "04",
+    title: "Optimize",
+    description: "We continually improve campaign performance through A/B testing, audience refinement, creative optimization, bid adjustments, and conversion analysis.",
+    duration: "Week 4-5",
+    focus: "Efficiency Refinement"
   },
   {
     id: "scale",
     number: "05",
     title: "Scale",
-    description: "Aggressive optimization using proprietary attribution systems, growing capital allocation strictly based on clear, verifiable ROAS metrics.",
+    description: "Once campaigns achieve profitable results, we strategically increase budgets while maintaining efficiency and maximizing return on investment.",
     duration: "Continuous",
-    focus: "Absolute Dominance"
+    focus: "Revenue Multiplier"
   }
 ];
 

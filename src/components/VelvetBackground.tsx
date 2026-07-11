@@ -55,27 +55,135 @@ export default function VelvetBackground() {
   const targetYRef = useRef(0);
   const hasMovedRef = useRef(false);
 
+  // High-fidelity touch interactive arrays
+  const touchSparksRef = useRef<{
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    size: number;
+    alpha: number;
+    color: string;
+    decay: number;
+    gravity: number;
+  }[]>([]);
+
+  const touchRipplesRef = useRef<{
+    x: number;
+    y: number;
+    radius: number;
+    maxRadius: number;
+    alpha: number;
+    speed: number;
+  }[]>([]);
+
+  // Emitters
+  const spawnSparks = (x: number, y: number, count: number, isTouch: boolean) => {
+    const sparks = touchSparksRef.current;
+    if (sparks.length > 200) {
+      sparks.splice(0, sparks.length - 200);
+    }
+
+    const baseSize = isTouch ? 2.8 : 1.5;
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * (isTouch ? 4.0 : 2.0) + 0.6;
+      
+      const golds = [
+        "rgba(255, 215, 0,",   // Pure Gold
+        "rgba(230, 195, 100,",  // Muted Gold
+        "rgba(244, 164, 96,",   // Sandy Amber
+        "rgba(212, 175, 55,",   // Metallic Gold
+        "rgba(255, 223, 0,",    // Golden Yellow
+      ];
+      const selectedGold = golds[Math.floor(Math.random() * golds.length)];
+
+      sparks.push({
+        x,
+        y,
+        vx: Math.cos(angle) * speed + (Math.random() - 0.5) * 0.3,
+        vy: Math.sin(angle) * speed + (Math.random() - 0.5) * 0.3,
+        size: Math.random() * baseSize + 0.5,
+        alpha: 1.0,
+        color: selectedGold,
+        decay: Math.random() * 0.025 + 0.012,
+        gravity: isTouch ? 0.03 : 0.01, // slow elegant gold leaf floating down
+      });
+    }
+  };
+
+  const spawnRipple = (x: number, y: number, isTouch: boolean) => {
+    const ripples = touchRipplesRef.current;
+    if (ripples.length > 8) {
+      ripples.shift();
+    }
+    ripples.push({
+      x,
+      y,
+      radius: 4,
+      maxRadius: isTouch ? 110 : 70,
+      alpha: 0.9,
+      speed: isTouch ? 3.2 : 2.2,
+    });
+  };
+
   // Mouse and Touch movement listener
   useEffect(() => {
+    let lastX = 0;
+    let lastY = 0;
+    let moveThreshold = 12; // spawn trail if finger moves enough pixels to prevent clumping
+
     const handleMouseMove = (e: MouseEvent) => {
       targetXRef.current = e.clientX;
       targetYRef.current = e.clientY;
       hasMovedRef.current = true;
+
+      // Subtle desktop hover sparkles
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > moveThreshold) {
+        if (Math.random() < 0.25) {
+          spawnSparks(e.clientX, e.clientY, 1, false);
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+      }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches && e.touches[0]) {
-        targetXRef.current = e.touches[0].clientX;
-        targetYRef.current = e.touches[0].clientY;
+        const touch = e.touches[0];
+        targetXRef.current = touch.clientX;
+        targetYRef.current = touch.clientY;
         hasMovedRef.current = true;
+
+        const dx = touch.clientX - lastX;
+        const dy = touch.clientY - lastY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        
+        // Continuously spawn beautiful stardust trail along the dragging motion
+        if (dist > moveThreshold - 4) {
+          spawnSparks(touch.clientX, touch.clientY, 3, true);
+          lastX = touch.clientX;
+          lastY = touch.clientY;
+        }
       }
     };
 
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches && e.touches[0]) {
-        targetXRef.current = e.touches[0].clientX;
-        targetYRef.current = e.touches[0].clientY;
+        const touch = e.touches[0];
+        targetXRef.current = touch.clientX;
+        targetYRef.current = touch.clientY;
         hasMovedRef.current = true;
+        
+        lastX = touch.clientX;
+        lastY = touch.clientY;
+
+        // Rich tap-burst feedback on mobile touch
+        spawnSparks(touch.clientX, touch.clientY, 18, true);
+        spawnRipple(touch.clientX, touch.clientY, true);
       }
     };
 
@@ -423,7 +531,7 @@ export default function VelvetBackground() {
     const renderDust = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Render glowing golden dust particles
+      // 1. Render normal floating background gold dust particles
       ctx.save();
       particles.forEach((p) => {
         p.pulsePhase += p.pulseSpeed;
@@ -432,7 +540,7 @@ export default function VelvetBackground() {
         let currentX = p.x;
         let currentY = p.y;
 
-        // Gravitational drag toward mouse
+        // Gravitational drag toward mouse/finger
         if (hasMovedRef.current) {
           const dx = mouseXRef.current - p.x;
           const dy = mouseYRef.current - p.y;
@@ -464,6 +572,76 @@ export default function VelvetBackground() {
         if (p.x < -15) p.x = width + 15;
         if (p.x > width + 15) p.x = -15;
       });
+      ctx.restore();
+
+      // 2. Render highly interactive expanding tactile touch/pointer ripples
+      ctx.save();
+      const ripples = touchRipplesRef.current;
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.radius += r.speed;
+        r.alpha -= r.speed / r.maxRadius; // gradual fade out
+
+        if (r.alpha <= 0 || r.radius >= r.maxRadius) {
+          ripples.splice(i, 1);
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(230, 195, 117, ${r.alpha})`;
+        ctx.lineWidth = 1.5;
+        ctx.shadowColor = "#E6C575";
+        ctx.shadowBlur = 8;
+        ctx.stroke();
+
+        // Subtle inner echo ring
+        if (r.radius > 15) {
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.radius - 12, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(230, 195, 117, ${r.alpha * 0.45})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+      ctx.restore();
+
+      // 3. Render active, physics-based golden touch sparks & stardust trail
+      ctx.save();
+      const sparks = touchSparksRef.current;
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += s.gravity; // drift gravity
+        s.vx *= 0.98;       // friction resistance
+        s.vy *= 0.98;
+        s.alpha -= s.decay; // fade-out over lifetime
+
+        if (s.alpha <= 0 || s.size <= 0.15) {
+          sparks.splice(i, 1);
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.shadowColor = "#E6C575";
+        ctx.shadowBlur = s.size * 3.5;
+        ctx.fillStyle = s.color + `${s.alpha})`;
+        ctx.fill();
+
+        // Star-like horizontal/vertical cross glints for premium larger sparks
+        if (s.size > 2.4 && s.alpha > 0.45) {
+          ctx.strokeStyle = `rgba(255, 235, 150, ${s.alpha * 0.7})`;
+          ctx.lineWidth = 0.55;
+          ctx.beginPath();
+          ctx.moveTo(s.x - s.size * 2.8, s.y);
+          ctx.lineTo(s.x + s.size * 2.8, s.y);
+          ctx.moveTo(s.x, s.y - s.size * 2.8);
+          ctx.lineTo(s.x, s.y + s.size * 2.8);
+          ctx.stroke();
+        }
+      }
       ctx.restore();
 
       animationFrameId = requestAnimationFrame(renderDust);

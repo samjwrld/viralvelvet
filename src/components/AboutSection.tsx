@@ -5,18 +5,18 @@ export default function AboutSection() {
   const values = [
     {
       icon: <Eye size={18} className="text-luxury-gold" />,
-      title: "Curation",
-      description: "We guard your brand's silence. We only deploy messaging when there is a true commercial reason to command attention."
+      title: "Audience Intelligence",
+      description: "We deploy deep targeting frameworks to locate high-intent buyers, identifying the core psychological triggers that drive conversion."
     },
     {
       icon: <Shield size={18} className="text-luxury-gold" />,
-      title: "Exclusivity",
-      description: "Restricting client volume to maintain absolute focus. We treat your brand's marketing as our own personal craft."
+      title: "Creative Excellence",
+      description: "No cheap templates. We craft tailored visual stories designed to captivate your audience, elevate your brand, and turn attention into actions."
     },
     {
       icon: <Award size={18} className="text-luxury-gold" />,
-      title: "Pedigree",
-      description: "Converting high aesthetic values into absolute mathematics. Luxury is engineered to perfection, and so are our metrics."
+      title: "Conversion Optimization",
+      description: "Exceptional marketing doesn't stop at the click. We build high-converting landing pages and track user journeys to maximize returns."
     }
   ];
 
@@ -30,7 +30,7 @@ export default function AboutSection() {
         {/* Editorial Section Header */}
         <div className="space-y-3">
           <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-luxury-gold block">
-            Our Core Creed
+            OUR PHILOSOPHY
           </span>
           <div className="w-8 h-[1px] bg-luxury-gold/20 mx-auto" />
         </div>
@@ -43,22 +43,52 @@ export default function AboutSection() {
           transition={{ duration: 1.1, ease: "easeOut" }}
           className="space-y-4"
         >
-          <h2 className="display-serif text-5xl md:text-7xl lg:text-8xl text-lux-text font-light tracking-wide leading-tight">
-            We don't market brands.<br />
-            <span className="font-light italic text-luxury-gold">We create obsession.</span>
+          <h2 className="display-serif text-4xl md:text-6xl lg:text-7xl text-lux-text font-light tracking-wide leading-tight">
+            Revenue Over Reach.<br />
+            <span className="font-light italic text-luxury-gold">Results Over Promises.</span>
           </h2>
         </motion.div>
 
-        {/* Minimal Supporting Copy */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          className="text-base md:text-lg text-lux-text/65 font-sans font-light max-w-2xl mx-auto leading-relaxed"
-        >
-          Traditional agencies measure success in digital reach. At ViralVelvet, we measure it in collective fascination. We align state-of-the-art computational performance with haute-couture sensory standards.
-        </motion.p>
+        {/* Supporting Copy */}
+        <div className="space-y-6 text-lux-text/75 font-sans font-light max-w-3xl mx-auto text-sm md:text-base leading-relaxed text-center">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.1 }}
+          >
+            Digital advertising has never been more competitive. Every day, businesses spend thousands on campaigns that generate clicks but fail to produce meaningful business results.
+          </motion.p>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.25 }}
+            className="text-luxury-gold font-medium display-serif text-lg md:text-xl"
+          >
+            ViralVelvet was built to solve that problem.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+          >
+            We combine strategy, audience intelligence, creative excellence, conversion optimization, and data-driven advertising to build campaigns that don't simply attract attention—they generate measurable business outcomes.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.55 }}
+            className="italic text-lux-text/60"
+          >
+            Whether you're an ambitious startup, an established enterprise, an eCommerce brand, or a local business ready to scale, we create advertising systems that help you grow with confidence.
+          </motion.p>
+        </div>
 
         {/* Fine Triple Value columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/5 text-left">
