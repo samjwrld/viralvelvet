@@ -237,59 +237,6 @@ export default function App() {
                 style={{ y: yRevenueEngines, display: "inline-block" }}
                 className="font-light italic text-luxury-gold relative inline-block px-2"
               >
-                {/* Sparkle 1: Top Right Twinkle & Rotate */}
-                <motion.div
-                  className="absolute -top-2.5 -right-3 sm:-top-3 sm:-right-4 text-luxury-gold pointer-events-none"
-                  animate={{
-                    scale: [0.6, 1.2, 0.6],
-                    opacity: [0.4, 1, 0.4],
-                    rotate: [0, 180, 360],
-                  }}
-                  transition={{
-                    duration: 3.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Sparkles className="w-3 sm:w-4 h-3 sm:h-4 fill-luxury-gold/30" />
-                </motion.div>
-                
-                {/* Sparkle 2: Bottom Left Twinkle & Rotate */}
-                <motion.div
-                  className="absolute -bottom-1 -left-3 sm:-left-4 text-luxury-gold pointer-events-none"
-                  animate={{
-                    scale: [1, 0.5, 1],
-                    opacity: [1, 0.3, 1],
-                    rotate: [360, 180, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.8,
-                  }}
-                >
-                  <Sparkles className="w-2.5 sm:w-3 h-2.5 sm:h-3 fill-luxury-gold/25" />
-                </motion.div>
-
-                {/* Sparkle 3: Subtle Mid-left Mini Sparkle */}
-                <motion.div
-                  className="absolute -top-1 -left-1 text-luxury-gold/70 pointer-events-none hidden sm:block"
-                  animate={{
-                    scale: [0.4, 1, 0.4],
-                    opacity: [0.2, 0.8, 0.2],
-                    rotate: [45, 225, 405],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1.5,
-                  }}
-                >
-                  <Sparkles className="w-2 h-2 fill-luxury-gold/15" />
-                </motion.div>
-
                 {/* Subtle luxury golden radial glow behind the text to simulate a radiant aura */}
                 <span className="absolute inset-0 bg-luxury-gold/5 blur-[12px] sm:blur-[16px] rounded-full scale-125 -z-10 pointer-events-none animate-pulse" style={{ animationDuration: '4s' }} />
 
