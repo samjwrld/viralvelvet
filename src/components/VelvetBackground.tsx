@@ -158,16 +158,8 @@ export default function VelvetBackground() {
         targetYRef.current = touch.clientY;
         hasMovedRef.current = true;
 
-        const dx = touch.clientX - lastX;
-        const dy = touch.clientY - lastY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        
-        // Continuously spawn beautiful stardust trail along the dragging motion
-        if (dist > moveThreshold - 4) {
-          spawnSparks(touch.clientX, touch.clientY, 3, true);
-          lastX = touch.clientX;
-          lastY = touch.clientY;
-        }
+        lastX = touch.clientX;
+        lastY = touch.clientY;
       }
     };
 
@@ -180,10 +172,6 @@ export default function VelvetBackground() {
         
         lastX = touch.clientX;
         lastY = touch.clientY;
-
-        // Rich tap-burst feedback on mobile touch
-        spawnSparks(touch.clientX, touch.clientY, 18, true);
-        spawnRipple(touch.clientX, touch.clientY, true);
       }
     };
 
