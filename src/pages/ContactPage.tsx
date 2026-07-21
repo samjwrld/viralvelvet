@@ -267,7 +267,7 @@ export default function ContactPage() {
                         <input
                           type="text"
                           required
-                          placeholder="Marcus Aurelius"
+                          placeholder="Debasis Barik"
                           value={coordinates.name}
                           onChange={(e) => setCoordinates({ ...coordinates, name: e.target.value })}
                           className="w-full bg-black/50 border border-white/10 px-4 py-3 text-xs font-mono text-white placeholder-white/20 outline-none focus:border-luxury-gold transition-colors"

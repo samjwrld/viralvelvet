@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "motion/react";
 import { BookOpen, Calendar, ArrowLeft, ArrowRight, Mail, Sparkles, Check, Download, Share2 } from "lucide-react";
 
 interface Article {
@@ -20,6 +20,19 @@ export default function InsightsPage() {
   const [emailInput, setEmailInput] = useState("");
   const [downloadRequested, setDownloadRequested] = useState(false);
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const glow = useTransform(
+    scrollYProgress,
+    [0.9, 1],
+    ["0px 0px 0px rgba(212, 175, 55, 0)", "0px 0px 15px rgba(212, 175, 55, 0.8)"]
+  );
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (emailInput.trim() !== "") {
@@ -35,8 +48,8 @@ export default function InsightsPage() {
       category: "MEDIA MATHEMATICS",
       date: "JUNE 18, 2026",
       readTime: "7 MIN READ",
-      author: "Marcus Vance",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+      author: "Debasis Barik",
+      image: "https://images.unsplash.com/photo-1551288049-bbbda5366392?q=80&w=800&auto=format&fit=crop",
       summary: "Traditional pixel tracking is dead. Discover why server-side Conversions API (CAPI) and offline database synchronization are non-negotiable for scaling past $10M in annual revenue.",
       content: [
         "Over the last 24 months, standard web browser pixels have experienced a 35% drop in signal retention. As modern browsers enforce stricter cookie expiration and tracking prevention frameworks, agencies attempting to run raw pixel optimizations are wasting hundreds of thousands of dollars on unvetted target coordinates.",
@@ -51,8 +64,8 @@ export default function InsightsPage() {
       category: "CREATIVE INTEL",
       date: "MAY 29, 2026",
       readTime: "5 MIN READ",
-      author: "Evelyn Sterling",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop",
+      author: "Debasis Barik",
+      image: "https://images.unsplash.com/photo-1492691523567-6170c3295db5?q=80&w=800&auto=format&fit=crop",
       summary: "Explore the psychological triggers behind high-performing luxury vertical video. We analyze why polished corporate videos fail and organic aesthetic hooks consistently win.",
       content: [
         "Vanity creative is the silent killer of ad accounts. Luxury brands frequently spend $50k on ultra-polished cinematic product commercials, only for them to convert at a sub-1.2x ROAS. Why? Because the modern mobile viewer is entirely immune to obvious advertising.",
@@ -67,8 +80,8 @@ export default function InsightsPage() {
       category: "B2B FUNNEL",
       date: "APRIL 14, 2026",
       readTime: "9 MIN READ",
-      author: "Marcus Vance",
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop",
+      author: "Debasis Barik",
+      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800&auto=format&fit=crop",
       summary: "Vague landing pages and generic scheduling forms drain budgets. Learn how to engineer high-intent search capture and restriction layers to attract qualified enterprise executives.",
       content: [
         "In B2B lead generation, high lead volume is often a curse. Sales teams spend valuable hours filtering through unqualified submissions, while acquisition costs crawl upwards. True scale requires shifting the filtration process upstream.",
@@ -81,6 +94,18 @@ export default function InsightsPage() {
 
   return (
     <div id="insights-page" className="relative pt-32 pb-24 max-w-7xl mx-auto px-6 md:px-12 z-10">
+      {/* Scroll Progress Bar - Only visible when reading an article */}
+      <AnimatePresence>
+        {selectedArticle && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed top-0 left-0 right-0 h-1 bg-luxury-gold origin-left z-[100]"
+            style={{ scaleX, boxShadow: glow }}
+          />
+        )}
+      </AnimatePresence>
       
       <AnimatePresence mode="wait">
         {!selectedArticle ? (

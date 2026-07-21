@@ -42,5 +42,8 @@ export interface Testimonial {
 export interface ClientLogo {
   id: string;
   name: string;
+  industry?: string;
   symbol: string; // Dynamic monochrome vector symbol SVG-like or initials
+  leads?: string;
+  description?: string;
 }

@@ -12,83 +12,84 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Sequential trigger timing
-      delayChildren: 0.1,
+      staggerChildren: 0.2, // Increased stagger for luxury feel
+      delayChildren: 0.2,
     }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.9,
-      ease: [0.16, 1, 0.3, 1], // Cinematic custom expo
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1], // Luxury cubic bezier
     }
   }
 };
 
 const quoteVariantsLeft = {
-  hidden: { opacity: 0, x: -25 },
+  hidden: { opacity: 0, x: -30, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     x: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.9,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 1.4,
+      ease: [0.22, 1, 0.36, 1],
     }
   }
 };
 
 const quoteVariantsRight = {
-  hidden: { opacity: 0, x: 25 },
+  hidden: { opacity: 0, x: 30, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     x: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.9,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 1.4,
+      ease: [0.22, 1, 0.36, 1],
     }
   }
 };
 
-const paragraphVariants = {
-  hidden: { opacity: 0, y: 15 },
+const listContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.5,
+    }
+  }
+};
+
+const listItemVariants = {
+  hidden: { opacity: 0, y: 15, filter: "blur(5px)" },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1],
-      staggerChildren: 0.012,
-      delayChildren: 0.05,
-    }
-  }
-};
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1]
+      ease: [0.22, 1, 0.36, 1]
     }
   }
 };
 
 const imageSideVariants = {
-  hidden: { opacity: 0, scale: 0.96, y: 40 },
+  hidden: { opacity: 0, scale: 1.05, filter: "blur(15px)" },
   visible: {
     opacity: 1,
     scale: 1,
-    y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 1.2,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 1.8,
+      ease: [0.22, 1, 0.36, 1],
     }
   }
 };
@@ -164,21 +165,42 @@ export default function ServicesSection({ activeTexture = "obsidian" }: Services
                     </p>
                   </motion.div>
 
-                  {/* Supporting Minimal copy with staggered cinematic word-by-word reveal */}
-                  <motion.p
-                    variants={paragraphVariants}
-                    className="text-sm text-lux-text/60 leading-relaxed font-sans font-light max-w-lg"
-                  >
-                    {service.description.split(" ").map((word, wordIndex) => (
-                      <motion.span
-                        key={wordIndex}
-                        variants={wordVariants}
-                        className="inline-block mr-[0.25em] whitespace-nowrap"
+                  {/* Supporting Minimal copy with staggered list for Meta Ads or plain paragraph for others */}
+                  {service.id === "meta-ads" ? (
+                    <motion.div
+                      variants={listContainerVariants}
+                      className="space-y-4 max-w-lg"
+                    >
+                      <motion.p 
+                        variants={listItemVariants}
+                        className="text-sm text-lux-text/80 font-sans font-normal"
                       >
-                        {word}
-                      </motion.span>
-                    ))}
-                  </motion.p>
+                        Our Meta Ads ecosystem includes:
+                      </motion.p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                        {service.description
+                          .replace("Our Meta Ads services include: ", "")
+                          .split(", ")
+                          .map((feature, fIdx) => (
+                            <motion.div
+                              key={fIdx}
+                              variants={listItemVariants}
+                              className="flex items-center gap-2 text-[11px] text-lux-text/60 font-sans font-light"
+                            >
+                              <div className="w-1 h-1 rounded-full bg-luxury-gold/40" />
+                              {feature}
+                            </motion.div>
+                          ))}
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.p
+                      variants={itemVariants}
+                      className="text-sm text-lux-text/60 leading-relaxed font-sans font-light max-w-lg"
+                    >
+                      {service.description}
+                    </motion.p>
+                  )}
 
                   {/* Dynamic Metric Display */}
                   {service.metricVal && (
@@ -236,7 +258,13 @@ export default function ServicesSection({ activeTexture = "obsidian" }: Services
           </div>
 
           <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
               {[
                 { title: "High-Converting Landing Pages", desc: "Crafting optimized destinations that convert visitors into valuable clients." },
                 { title: "Website Design & Development", desc: "Engineered with speed and precision for custom user journeys." },
@@ -249,8 +277,9 @@ export default function ServicesSection({ activeTexture = "obsidian" }: Services
                 { title: "Pixel & Conversion Tracking", desc: "Advanced server-side conversion API plumbing for flawless attribution." },
                 { title: "Marketing Automation", desc: "Custom email & text follow-ups to nurture leads into acquisitions." }
               ].map((sub, sIdx) => (
-                <div 
+                <motion.div 
                   key={sub.title}
+                  variants={listItemVariants}
                   className="p-5 border border-white/5 bg-[#131313]/20 hover:border-luxury-gold/20 transition-all duration-300"
                 >
                   <div className="flex items-start gap-3">
@@ -264,9 +293,9 @@ export default function ServicesSection({ activeTexture = "obsidian" }: Services
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
         </div>

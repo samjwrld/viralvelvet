@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
-import { PORTFOLIO_DATA } from "../data";
+import { PORTFOLIO_DATA, CLIENT_LOGOS } from "../data";
 import { Sparkles, Calendar, TrendingUp } from "lucide-react";
 
 // Helper component for animating individual numeric stats
@@ -152,6 +152,68 @@ export default function PortfolioSection() {
             </motion.div>
           );
         })}
+      </div>
+
+      {/* Portfolio Impact Grid (Moved from Home/Clients) */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-40">
+        <div className="mb-16">
+          <h4 className="font-mono text-[10px] uppercase tracking-[0.5em] text-luxury-gold mb-3 flex items-center gap-2">
+            <span className="w-8 h-px bg-luxury-gold/30"></span>
+            Impact Analysis
+          </h4>
+          <h3 className="display-serif text-3xl md:text-5xl text-lux-text leading-tight">
+            Qualified Lead <span className="italic text-luxury-gold/80">Matrices</span>
+          </h3>
+          <p className="font-sans text-sm text-lux-text/40 mt-4 max-w-lg">
+            Detailed performance breakdown of the 500+ high-intent leads generated for our premier partners.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {CLIENT_LOGOS.map((brand, index) => (
+            <motion.div
+              key={brand.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="group/card relative bg-white/[0.02] border border-white/5 p-8 rounded-2xl hover:bg-white/[0.04] hover:border-luxury-gold/20 transition-all duration-500"
+            >
+              <div className="flex items-start justify-between mb-8">
+                <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center font-serif text-3xl text-luxury-gold italic group-hover/card:scale-110 transition-transform duration-500 bg-[#131313] shadow-2xl">
+                  {brand.symbol}
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-mono text-luxury-gold font-bold tracking-tighter">
+                    {brand.leads}
+                  </div>
+                  <div className="text-[9px] font-mono text-lux-text/40 uppercase tracking-[0.2em]">
+                    Qualified Leads
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <div className="text-[10px] font-mono text-luxury-gold/60 uppercase tracking-[0.3em] mb-2">
+                  {brand.industry}
+                </div>
+                <h5 className="font-mono text-sm text-lux-text tracking-wider uppercase font-semibold mb-4">
+                  {brand.name}
+                </h5>
+                <p className="text-xs text-lux-text/50 leading-relaxed font-sans">
+                  {brand.description}
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                <span className="text-[9px] font-mono text-lux-text/30 uppercase tracking-widest">
+                  Strategic Partnership
+                </span>
+                <div className="w-1.5 h-1.5 rounded-full bg-luxury-gold animate-pulse" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -23,16 +23,10 @@ export default function AboutPage() {
 
   const leaders = [
     {
-      name: "Marcus Vance",
-      title: "Co-Founder & Director of Media Mathematics",
-      bio: "Marcus has spent over a decade leading digital media buying for high-growth tech companies and high-end consumer brands, scaling ad accounts from $10k/mo to over $2.5M/mo in profitable spend. He holds a degree in Mathematical Analytics and guides ViralVelvet's server-side tracking architecture.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop"
-    },
-    {
-      name: "Evelyn Sterling",
-      title: "Co-Founder & Chief of Brand Desire",
-      bio: "Evelyn guides ViralVelvet's high-converting creative engine. With background experience directing editorial fashion campaigns in Paris and Milan, she specializes in translating luxury brand heritage into high-converting vertical video assets and high-impact digital experiences.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop"
+      name: "Debasis Barik",
+      title: "Founder & Chief Growth Architect",
+      bio: "Debasis is the visionary architect behind ViralVelvet's performance marketing engine. With a profound expertise in scaling high-intent digital acquisition funnels and a background in strategic brand growth, he guides the agency's mission to transform advertising into predictable revenue for elite brands.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
     }
   ];
 
@@ -70,6 +64,27 @@ export default function AboutPage() {
         <p className="text-sm sm:text-base text-lux-text/75 font-sans font-light leading-relaxed max-w-2xl">
           ViralVelvet was founded because digital advertising has become lazy. We reject generic templates, low-performing strategies, and agencies that hide behind ambiguous metrics. We build elite engines for brands that demand perfection.
         </p>
+
+        {/* Hero Image Section */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="relative aspect-[21/9] w-full overflow-hidden border border-white/5 bg-neutral-900 group"
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop"
+            alt="ViralVelvet Strategy Studio"
+            className="w-full h-full object-cover grayscale opacity-50 group-hover:scale-105 transition-transform duration-1000"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute bottom-8 left-8 z-20">
+            <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-luxury-gold">
+              WHERE STRATEGY MEETS SCALE
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* 2. Manifesto Section */}
@@ -110,12 +125,12 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {leaders.map((leader, index) => (
+        <div className="grid grid-cols-1 gap-8 max-w-2xl">
+          {leaders.map((leader) => (
             <motion.div
               key={leader.name}
-              initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="border border-white/5 bg-black/40 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start transition-all hover:border-luxury-gold/20"

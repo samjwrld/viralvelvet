@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "motion/react";
 import { RefreshCw, ExternalLink, Newspaper, Calendar } from "lucide-react";
 
 interface NewsItem {
@@ -16,6 +16,24 @@ export default function AgencyInsights() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const glow = useTransform(
+    scrollYProgress,
+    [0.95, 1],
+    ["0px 0px 0px rgba(212, 175, 55, 0)", "0px 0px 10px rgba(212, 175, 55, 0.6)"]
+  );
 
   const fetchNews = async (silent = false) => {
     if (!silent) {
@@ -50,7 +68,17 @@ export default function AgencyInsights() {
   }, []);
 
   return (
-    <section id="insights" className="py-28 bg-transparent relative overflow-hidden border-t border-white/5">
+    <section 
+      id="insights" 
+      ref={sectionRef}
+      className="py-28 bg-transparent relative overflow-hidden border-t border-white/5"
+    >
+      {/* Section Reading Progress Bar */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[1px] bg-luxury-gold/40 origin-left z-20"
+        style={{ scaleX, boxShadow: glow }}
+      />
+
       {/* Decorative luxury gradient spot */}
       <div className="absolute bottom-1/4 left-10 w-[450px] h-[450px] bg-luxury-gold/5 rounded-full blur-[130px] pointer-events-none" />
 
